@@ -18,4 +18,8 @@ git commit -m "AQUI ADICIONEM A FUNCIONALIDADE OU O QUE VOCES ATUALIZARAM"
 git push origin main
 
 
+4º passo:
+para puxar atualizações
+shift + direito na pasta do projetoredes (onde voces clonaram) abrir janela do powershell aqui e de o seguinte comando
 
+git pull origin main
