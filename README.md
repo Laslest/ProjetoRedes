@@ -13,7 +13,7 @@ git clone https://github.com/Laslest/ProjetoRedes.git
 
 Para enviarem atualizações ( estejam certo de que esteja funcionando )
 
-shift + direito na pasta do projetoredes (onde voces clonaram) abrir janela do powershell aqui e deem os seguintes comandos
+shift + direito na pasta ProjetoRedes (a que voces clonaram) abrir janela do powershell aqui e deem os seguintes comandos
 
 git add .
 
@@ -26,6 +26,6 @@ git push origin main
 
 para puxar atualizações
 
-shift + direito na pasta do projetoredes (onde voces clonaram) abrir janela do powershell aqui e de o seguinte comando
+shift + direito na pasta ProjetoRedes abrir janela do powershell aqui e de o seguinte comando
 
 git pull origin main
