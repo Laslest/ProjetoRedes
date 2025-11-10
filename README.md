@@ -15,7 +15,7 @@ Para enviarem atualizações ( estejam certo de que esteja funcionando )
 
 shift + direito na pasta ProjetoRedes (a que voces clonaram) abrir janela do powershell aqui e deem os seguintes comandos
 
-git add .
+git add NOME DO ARQUIVO QUE MODIFICOU (por exemplo redes.py)
 
 git commit -m "AQUI ADICIONEM A FUNCIONALIDADE OU O QUE VOCES ATUALIZARAM"
 
