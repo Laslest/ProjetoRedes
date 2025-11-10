@@ -1,0 +1,17 @@
+# Arquivos gerados pelo Python
+__pycache__/
+*.pyc
+
+# Pastas de Ambiente Virtual (muito importante)
+venv/
+env/
+.venv/
+.env
+
+# Arquivos de IDEs/Editores
+.vscode/
+.idea/
+
+# Arquivos de Sistema Operacional
+.DS_Store
+Thumbs.db
