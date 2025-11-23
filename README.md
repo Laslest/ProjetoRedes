@@ -32,14 +32,22 @@ git pull origin main
 
 ## Chat pelo navegador (opcional)
 
+
 1º Instale as dependências mínimas:
 	```powershell
 	pip install -r requirements.txt
 	```
+
+	
 2º. Inicie o servidor (escolha apenas um comando):
 	```powershell
 	python servidor.py
 	```
+
+	
 3º. Abra o navegador e acesse `http://127.0.0.1:8000`.
+
+
+
 4º. Informe um nome simples e clique em "Conectar" para começar a conversar.
 
