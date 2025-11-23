@@ -29,3 +29,22 @@ para puxar atualizações
 shift + direito na pasta ProjetoRedes abrir janela do powershell aqui e de o seguinte comando
 
 git pull origin main
+
+## Chat pelo navegador (opcional)
+
+1. Instale as dependências opcionais:
+	```powershell
+	pip install -r requirements.txt
+	```
+2. Em um terminal rode o servidor original:
+	```powershell
+	python servidor.py
+	```
+3. Em outro terminal suba a ponte WebSocket:
+	```powershell
+	python web_bridge.py
+	```
+4. Abra o arquivo `static/index.html` no navegador e conecte-se informando um nome.
+
+> A lógica do chat continua exatamente a mesma (TCP + sockets). A página web conversa com o servidor usando `web_bridge.py` como tradutor WebSocket → TCP.
+
