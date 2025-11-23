@@ -32,19 +32,14 @@ git pull origin main
 
 ## Chat pelo navegador (opcional)
 
-1. Instale as dependências opcionais:
+1º Instale as dependências mínimas:
 	```powershell
 	pip install -r requirements.txt
 	```
-2. Em um terminal rode o servidor original:
+2º. Inicie o servidor (escolha apenas um comando):
 	```powershell
 	python servidor.py
 	```
-3. Em outro terminal suba a ponte WebSocket:
-	```powershell
-	python web_bridge.py
-	```
-4. Abra o arquivo `static/index.html` no navegador e conecte-se informando um nome.
-
-> A lógica do chat continua exatamente a mesma (TCP + sockets). A página web conversa com o servidor usando `web_bridge.py` como tradutor WebSocket → TCP.
+3º. Abra o navegador e acesse `http://127.0.0.1:8000`.
+4º. Informe um nome simples e clique em "Conectar" para começar a conversar.
 
