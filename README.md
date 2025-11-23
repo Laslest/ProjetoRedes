@@ -39,7 +39,7 @@ git pull origin main
 	```
 
 	
-2º. Inicie o servidor (escolha apenas um comando):
+2º. Inicie o servidor:
 	```powershell
 	python servidor.py
 	```
