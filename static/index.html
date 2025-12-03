@@ -555,6 +555,12 @@
 				btnDesafiar.style.display = 'block';
 				btnDesafiar.style.width = '100%';
 				btnDesafiar.style.marginBottom = '6px';
+				if (user === username) {
+				    btnDesafiar.disabled = true;
+				    btnDesafiar.textContent = 'Você não pode se desafiar';
+				    btnDesafiar.style.opacity = '0.5';
+				    btnDesafiar.style.cursor = 'not-allowed';
+				}
 				btnDesafiar.addEventListener('click', () => {
 					if (!socket || socket.readyState !== WebSocket.OPEN) {
 						appendMessage('Você não está conectado.', 'system');
