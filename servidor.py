@@ -158,6 +158,9 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
             # /desafiar <nome>
             if mensagem.startswith("/desafiar "):
                 alvo = mensagem.split(maxsplit=1)[1].strip()
+                if alvo == username:
+                    await websocket.send_text("SISTEMA: você não pode desafiar a si mesmo!")
+                    continue
                 ws_alvo = manager.get_ws_by_username(alvo)
                 if not ws_alvo:
                     await websocket.send_text("SISTEMA: usuário não encontrado")
