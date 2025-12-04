@@ -1,0 +1,194 @@
+html, body { height: 100%; margin: 0; }
+		body { overflow: hidden; }
+
+		:root {
+			color-scheme: light dark;
+			font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+			--bg: radial-gradient(circle at top, #4f46e5 0%, #1f2937 55%, #0f172a 100%);
+			--panel: rgba(15, 23, 42, 0.8);
+			--accent: #3b82f6;
+			--muted: rgba(255,255,255,0.1);
+		}
+
+		/* Tema específico: Flamengo */
+		.theme-flamengo {
+			--bg: linear-gradient(120deg,#101010 0%, #000000 60%);
+			--panel: linear-gradient(180deg, rgba(203,20,35,0.95), rgba(165,0,31,0.9));
+			--accent: #000000;
+			--muted: rgba(255,255,255,0.12);
+		}
+		* { box-sizing: border-box; }
+		body {
+			margin: 0;
+			min-height: 100vh;
+			display: grid;
+			place-items: center;
+			background: var(--bg);
+			color: #f3f4f6;
+			padding: 20px;
+		}
+		.container {
+			width: min(960px, 95vw);
+			height: calc(100vh - 40px);
+			background: var(--panel);
+			border-radius: 16px;
+			display: grid;
+			grid-template-rows: auto 1fr auto;
+			padding: 24px;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+			-webkit-backdrop-filter: blur(12px);
+			backdrop-filter: blur(12px);
+		}
+		header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+		}
+		#club-symbol { display: none; width:36px; height:36px; align-items:center; justify-content:center; border-radius:6px; font-weight:800; background: rgba(255,255,255,0.03); cursor:pointer; color:var(--accent); }
+		h1 { margin: 0; font-size: 1.5rem; }
+		.status {
+			padding: 6px 14px;
+			border-radius: 999px;
+			font-size: 0.9rem;
+			font-weight: 600;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		}
+		.status-online { color: #bbf7d0; border-color: #22c55e; }
+		.status-offline { color: #fecdd3; border-color: #f43f5e; }
+
+		/* Tela de Chat */
+		#chat-screen { display: flex; flex-direction: column; height: 100%; }
+		#chat-log {
+			flex: 1;
+			padding: 16px;
+			border-radius: 12px;
+			background: rgba(15, 23, 42, 0.55);
+			overflow-y: auto;
+			min-height: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			margin: 20px 0;
+		}
+		.message {
+			padding: 10px 14px;
+			border-radius: 10px;
+			background: rgba(59, 130, 246, 0.15);
+			border: 1px solid rgba(59, 130, 246, 0.25);
+			word-break: break-word;
+		}
+		.system {
+			background: rgba(251, 191, 36, 0.15);
+			border-color: rgba(251, 191, 36, 0.3);
+			text-align: center;
+			font-size: 0.9rem;
+			font-style: italic;
+		}
+		#chat-inputs { display: flex; gap: 12px; flex-direction: column; }
+		.input-row { display: flex; gap: 12px; }
+
+		/* Tela de Jogo */
+		#game-screen {
+			display: none;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+			gap: 20px;
+		}
+		.game-info { text-align: center; }
+		.game-info h2 { margin: 0; font-size: 1.3rem; }
+		.game-info p { margin: 8px 0; font-size: 1rem; }
+		#game-board {
+			display: grid;
+			grid-template-columns: repeat(3, 80px);
+			gap: 8px;
+		}
+
+		/* Layout com lista de usuários (barra lateral) */
+		.content { display: grid; grid-template-columns: 220px 1fr; gap: 16px; height: 100%; }
+		/* Permitir que filhos flex/grid encolham corretamente para rolagem interna */
+		.content, #right-column, #chat-screen { min-height: 0; }
+		#user-list {
+			background: rgba(255,255,255,0.03);
+			padding: 12px;
+			border-radius: 12px;
+			border: 1px solid rgba(255,255,255,0.04);
+			min-height: 100%;
+		}
+		#user-items button { all: unset; display:block; width:100%; text-align:left; padding:8px 10px; border-radius:8px; cursor:pointer; }
+		#user-items button:hover { background: rgba(59,130,246,0.06); }
+		#user-items button.self { font-weight:700; color: #ffd580; }
+		#right-column { display:flex; flex-direction:column; height:100%; }
+		.board-cell {
+			width: 80px;
+			height: 80px;
+			background: rgba(59, 130, 246, 0.2);
+			border: 2px solid #3b82f6;
+			border-radius: 8px;
+			font-size: 2rem;
+			font-weight: bold;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			transition: all 0.2s;
+		}
+		.board-cell:hover:not(.disabled) { background: rgba(59, 130, 246, 0.4); transform: scale(1.05); }
+		.board-cell.disabled { cursor: not-allowed; opacity: 0.6; }
+		.board-cell.x { color: #22c55e; }
+		.board-cell.o { color: #f59e0b; }
+		#game-controls { display: flex; gap: 12px; }
+
+		form { display: flex; gap: 12px; }
+		input[type="text"] {
+			flex: 1;
+			padding: 14px;
+			border-radius: 10px;
+			border: none;
+			font-size: 1rem;
+			background: rgba(255, 255, 255, 0.1);
+			color: inherit;
+		}
+		input[type="text"]:focus { outline: 2px solid #3b82f6; }
+		button {
+			padding: 14px 22px;
+			border: none;
+			border-radius: 10px;
+			background: linear-gradient(120deg, #6366f1, #3b82f6);
+			color: #fff;
+			font-weight: 600;
+			cursor: pointer;
+			font-size: 1rem;
+		}
+		button:disabled { opacity: 0.6; cursor: not-allowed; }
+		button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+
+		dialog {
+			border: none;
+			border-radius: 16px;
+			padding: 24px;
+			background: #0f172a;
+			color: inherit;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+		}
+		dialog form { flex-direction: column; }
+		dialog label { font-size: 0.95rem; margin-bottom: 8px; }
+		dialog input { width: 100%; }
+		dialog button { margin-top: 16px; width: 100%; }
+
+		@media (max-width: 600px) {
+			.container { width: 95vw; height: 95vh; border-radius: 0; }
+			form { flex-direction: column; }
+			button { width: 100%; height: 48px; }
+			.input-row { flex-direction: column; }
+			.board-cell { width: 60px; height: 60px; font-size: 1.5rem; }
+			#game-board { grid-template-columns: repeat(3, 60px); gap: 6px; }
+
+			/* Mobile: permitir rolagem da página e empilhar a lista de usuários */
+			body { overflow: auto; }
+			.container { height: auto; max-height: 95vh; }
+			.content { grid-template-columns: 1fr; }
+			#user-list { order: -1; margin-bottom: 12px; }
+		}
