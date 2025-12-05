@@ -19,7 +19,7 @@ import uvicorn
 import json
 
 # Endereço e porta onde o servidor HTTP/WebSocket vai escutar.
-HOST = "127.0.0.1"
+HOST = "0.0.0.0"
 PORT = 8000
 
 # Diretório e arquivo HTML estático (se existir serão servidos em '/').
@@ -159,15 +159,14 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
             if mensagem.startswith("/desafiar "):
                 alvo = mensagem.split(maxsplit=1)[1].strip()
                 if alvo == username:
-                    await websocket.send_text("SISTEMA: você não pode desafiar a si mesmo!")
+                    await websocket.send_text(" você não pode desafiar a si mesmo!")
                     continue
                 ws_alvo = manager.get_ws_by_username(alvo)
                 if not ws_alvo:
-                    await websocket.send_text("SISTEMA: usuário não encontrado")
+                    await websocket.send_text(" usuário não encontrado")
                 else:
                     pending_challenges[alvo] = username
-                    await ws_alvo.send_text(f"SISTEMA: {username} te desafiou para 'velha'. Digite /aceitar ou /recusar")
-                    await websocket.send_text("SISTEMA: desafio enviado")
+                    await ws_alvo.send_text(f" {username} te desafiou para 'jogo da velha'. Aperte em aceitar para começar!")
                 continue
 
             # /aceitar
@@ -175,7 +174,7 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
                 meu_nome = username
                 desafiante = pending_challenges.pop(meu_nome, None)
                 if not desafiante:
-                    await websocket.send_text("SISTEMA: nenhum desafio pendente")
+                    await websocket.send_text(" nenhum desafio pendente")
                 else:
                     key = tuple(sorted([meu_nome, desafiante]))
                     active_games[key] = {"board": [""]*9, "turn": desafiante, "symbols": {desafiante:"X", meu_nome:"O"}}
@@ -186,40 +185,40 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
                     for player in key:
                         ws_player = manager.get_ws_by_username(player)
                         if ws_player:
-                            await ws_player.send_text(f"SISTEMA: vez de {desafiante}")
+                            await ws_player.send_text(f" vez de {desafiante}")
                 continue
 
             # /jogada r c
             if mensagem.startswith("/jogada "):
                 parts = mensagem.split()
                 if len(parts) < 3:
-                    await websocket.send_text("SISTEMA: uso correto /jogada r c")
+                    await websocket.send_text(" uso correto /jogada r c")
                     continue
                 try:
                     r = int(parts[1])
                     c = int(parts[2])
                 except ValueError:
-                    await websocket.send_text("SISTEMA: coordenadas inválidas")
+                    await websocket.send_text(" coordenadas inválidas")
                     continue
 
                 if not (0 <= r <= 2 and 0 <= c <= 2):
-                    await websocket.send_text("SISTEMA: coordenadas fora do intervalo 0..2")
+                    await websocket.send_text(" coordenadas fora do intervalo 0..2")
                     continue
 
                 meu = username
                 for key, game in list(active_games.items()):
                     if meu in key:
                         if game["turn"] != meu:
-                            await websocket.send_text("SISTEMA: não é sua vez")
+                            await websocket.send_text(" não é sua vez")
                             break
 
                         pos = r * 3 + c
                         if pos < 0 or pos >= 9:
-                            await websocket.send_text("SISTEMA: posição inválida")
+                            await websocket.send_text(" posição inválida")
                             break
 
                         if game["board"][pos]:
-                            await websocket.send_text("SISTEMA: posição ocupada")
+                            await websocket.send_text(" posição ocupada")
                             break
 
                         game["board"][pos] = game["symbols"][meu]
@@ -256,7 +255,7 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
                         for player in key:
                             ws_player = manager.get_ws_by_username(player)
                             if ws_player:
-                                await ws_player.send_text(f"SISTEMA: vez de {jogador_outro}")
+                                await ws_player.send_text(f" vez de {jogador_outro}")
                         break
                 continue
 

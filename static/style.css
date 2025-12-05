@@ -28,8 +28,8 @@ html, body { height: 100%; margin: 0; }
 			padding: 20px;
 		}
 		.container {
-			width: min(960px, 95vw);
-			height: calc(100vh - 40px);
+			width: 80%;
+			height: 85%;
 			background: var(--panel);
 			border-radius: 16px;
 			display: grid;
@@ -168,15 +168,53 @@ html, body { height: 100%; margin: 0; }
 		dialog {
 			border: none;
 			border-radius: 16px;
+			margin-left: 48%;
 			padding: 24px;
 			background: #0f172a;
 			color: inherit;
 			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 		}
+		dialog::backdrop {
+			background: rgba(0, 0, 0, 0.7);
+			-webkit-backdrop-filter: blur(4px);
+			backdrop-filter: blur(4px);
+		}
 		dialog form { flex-direction: column; }
 		dialog label { font-size: 0.95rem; margin-bottom: 8px; }
 		dialog input { width: 100%; }
 		dialog button { margin-top: 16px; width: 100%; }
+
+		/* Dialog de convite de jogo */
+		#invite-dialog {
+			text-align: center;
+			min-width: 280px;
+		}
+		#invite-dialog h2 {
+			margin: 0 0 16px 0;
+			font-size: 1.4rem;
+		}
+		#invite-dialog p {
+			margin: 0 0 20px 0;
+			font-size: 1rem;
+			color: #e2e8f0;
+		}
+		.invite-buttons {
+			display: flex;
+			gap: 12px;
+			justify-content: center;
+		}
+		.btn-accept-invite {
+			background: linear-gradient(120deg, #22c55e, #16a34a) !important;
+		}
+		.btn-accept-invite:hover:not(:disabled) {
+			background: linear-gradient(120deg, #16a34a, #15803d) !important;
+		}
+		.btn-decline-invite {
+			background: linear-gradient(120deg, #ef4444, #dc2626) !important;
+		}
+		.btn-decline-invite:hover:not(:disabled) {
+			background: linear-gradient(120deg, #dc2626, #b91c1c) !important;
+		}
 
 		@media (max-width: 600px) {
 			.container { width: 95vw; height: 95vh; border-radius: 0; }

@@ -4,8 +4,7 @@
 	<meta charset="utf-8">
 	<title>Projeto Redes - Chat + Jogo da Velha</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="style.css">
-	<link rel="script" href="">
+	<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 	<main class="container">
@@ -29,7 +28,6 @@
 					<section id="chat-log" aria-live="polite"></section>
 					<div id="chat-inputs">
 						<div class="input-row">
-							<button id="btn-accept" disabled>Aceitar</button>
 						</div>
 						<form id="message-form" autocomplete="off">
 							<input id="message-input" type="text" placeholder="Digite uma mensagem" maxlength="240" disabled>
@@ -61,6 +59,17 @@
 		</form>
 	</dialog>
 
-	<script src="js/script.js"></script>
+	<dialog id="invite-dialog">
+		<div class="invite-content">
+			<h2>🎮 Convite de Jogo</h2>
+			<p id="invite-message"></p>
+			<div class="invite-buttons">
+				<button id="invite-accept" class="btn-accept-invite">Aceitar</button>
+				<button id="invite-decline" class="btn-decline-invite">Recusar</button>
+			</div>
+		</div>
+	</dialog>
+
+	<script src="/static/script.js"></script>
 </body>
 </html>

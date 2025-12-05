@@ -18,6 +18,11 @@
 
 			const clubSymbolEl = document.getElementById('club-symbol');
 
+			const inviteDialog = document.getElementById('invite-dialog');
+			const inviteMessage = document.getElementById('invite-message');
+			const inviteAcceptBtn = document.getElementById('invite-accept');
+			const inviteDeclineBtn = document.getElementById('invite-decline');
+
 			let socket = null;
 			let username = '';
 			let gameActive = false;
@@ -173,12 +178,20 @@
 						return;
 					}
 
-					if (text.startsWith('SISTEMA: vez de ')) {
-						// SISTEMA: vez de <nome>
-						const playerName = text.substring('SISTEMA: vez de '.length).trim();
+					if (text.startsWith(' vez de ')) {
+						// vez de <nome>
+						const playerName = text.substring(' vez de '.length).trim();
 						myTurn = playerName === username;
 						gameStatus.textContent = myTurn ? 'Sua vez!' : `Vez de ${playerName}`;
 						renderBoard();
+						return;
+					}
+
+					// Detectar convite de jogo da velha
+					const inviteMatch = text.match(/^\s*(.+?) te desafiou para 'jogo da velha'/);
+					if (inviteMatch) {
+						const challenger = inviteMatch[1];
+						showInvitePopup(challenger);
 						return;
 					}
 
@@ -360,6 +373,28 @@
 			}
 
 			// botão de desafio por campo removido — desafios agora são realizados via menu da lista
+
+			function showInvitePopup(challenger) {
+				inviteMessage.textContent = `${challenger} te desafiou para Jogo da Velha!`;
+				inviteDialog.showModal();
+			}
+
+			function acceptInvite() {
+				if (!socket || socket.readyState !== WebSocket.OPEN) {
+					appendMessage('Você não está conectado.', 'system');
+					return;
+				}
+				socket.send('/aceitar');
+				inviteDialog.close();
+			}
+
+			function declineInvite() {
+				inviteDialog.close();
+				appendMessage('Você recusou o convite.', 'system');
+			}
+
+			inviteAcceptBtn.addEventListener('click', acceptInvite);
+			inviteDeclineBtn.addEventListener('click', declineInvite);
 
 			btnAccept.addEventListener('click', () => {
 				if (!socket || socket.readyState !== WebSocket.OPEN) {
