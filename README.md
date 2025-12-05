@@ -140,4 +140,4 @@ Exemplo: http://26.154.20.1:8000
 * **Davi Gesteira** - [Ver Perfil](https://github.com/Laslest)
 * **Carlos Victor** - [Ver Perfil](https://github.com/Vt-dnts)
 * **Cauã Raphael** - [Ver Perfil](https://github.com/cauaraphael)
-* **Cauã Raphael** - [Ver Perfil](https://github.com/dramos-cpu)
+* **David Pereira** - [Ver Perfil](https://github.com/dramos-cpu)
