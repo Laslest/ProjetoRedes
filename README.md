@@ -131,3 +131,13 @@ Você (Host): Inicia o servidor (python servidor.py) e entra no navegador pelo e
 Seu Amigo: Abre o navegador e digita o SEU IP do Radmin + a porta 8000.
 
 Exemplo: http://26.154.20.1:8000
+
+
+
+
+## 👨‍💻 Autores
+
+* **Davi Gesteira** - [Ver Perfil](https://github.com/Laslest)
+* **Carlos Victor** - [Ver Perfil](https://github.com/Vt-dnts)
+* **Cauã Raphael** - [Ver Perfil](https://github.com/cauaraphael)
+* **David Pereira** - [Ver Perfil](https://github.com/dramos-cpu)
